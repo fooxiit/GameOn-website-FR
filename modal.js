@@ -11,9 +11,17 @@ function editNav() {
 const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
+const formHTML = document.querySelector("#form-reserve")
+
+const FirstNameFiels = document.querySelector("#firsname-field")
+const BirthDateFiels = document.querySelector("#birthdate-field")
+const LocationFiels = document.querySelector("#loction-field")
+const CguFiels = document.querySelector("#cgu-field")
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
+
+formHTML.addEventListener("submit",submitForm)
 
 // launch modal form
 function launchModal() {
@@ -24,6 +32,61 @@ function launchModal() {
  */
 function closeModal() {
   modalbg.style.display = null
+}
+/**
+ * validate form
+ * @param {FormData} form 
+ */
+function validateForm(form){
+  
+
+  let err = false
+
+  
+  
+  if(!form.has("cgu")){
+    err = true
+    console.log("cgu error")
+    CguFiels.classList.add("field-error")
+  }else{
+    CguFiels.classList.remove("field-error")
+  }
+
+  if(!form.has("location")){
+    err = true
+    console.log("location error")
+    LocationFiels.classList.add("field-error")
+  }else{
+    LocationFiels.classList.remove("field-error")
+  }
+
+  if(!new RegExp("\\w{2,}").test(form.get("first"))){
+    err = true
+    console.log("name error")
+    FirstNameFiels.classList.add("field-error")
+  }else{
+    FirstNameFiels.classList.remove("field-error")
+  }
+
+  if(isNaN(new Date(form.get("birthdate")))){
+    err = true
+    console.log("birthdate error")
+    BirthDateFiels.classList.add("field-error")
+  }else{
+    BirthDateFiels.classList.remove("field-error")
+  }
+
+  return !err
+}
+/**
+ * subit form
+ * @param {Event} e 
+ */
+function submitForm(e){
+  e.preventDefault()
+  const form = new FormData(e.target)
+  if(!validateForm(form)) return
+
 }
 
 

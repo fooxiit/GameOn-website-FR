@@ -14,7 +14,7 @@ body {
   margin: 0;
   display: flex;
   flex-direction: column;
-  background-image: url("background.png");
+  /* background-image: url("background.png"); */
   font-family: var(--font-default);
   font-size: 18px;
   max-width: 1300px;
@@ -220,10 +220,10 @@ input {
   opacity: 0;
   transition: 0.3s;
 }
-.formData[data-error-visible="true"]::after {
+.field-error.formData::after {
   opacity: 1;
 }
-.formData[data-error-visible="true"] .text-control {
+.field-error .text-control {
   border: 2px solid #e54858;
 }
 /* 
