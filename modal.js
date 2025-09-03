@@ -67,9 +67,9 @@ function validateForm(form){
   if(!form.has("cgu")){
     err = true
     console.log("cgu error")
-    CguFiels.classList.add("field-error")
+    CguField.classList.add("field-error")
   }else{
-    CguFiels.classList.remove("field-error")
+    CguField.classList.remove("field-error")
   }
 
   if(!form.has("location")){
