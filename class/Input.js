@@ -58,7 +58,7 @@ export class TextInput extends Input{
         return `
             <div>
                 <label for="${this.id}">${this.label}</label>
-                <input onChange="(e)=>{this.onChange(e)}" type="${this.type}" id="${this.id}" name="${this.name}" placeholder="${this.placeholder}" minlength="${this.minLength}" maxlength="${this.maxLength}" required="${this.required}">
+                <input  type="${this.type}" id="${this.id}" name="${this.name}" placeholder="${this.placeholder}" minlength="${this.minLength}" maxlength="${this.maxLength}" required="${this.required}">
                 <span class="error">${this.error ? this.errorMessage : ''}</span>
             </div>
         `;
@@ -87,7 +87,7 @@ export class CheckboxInput extends Input{
         return `
             <div>
                 <label for="${this.id}">${this.label}</label>
-                <input onChange="(e)=>{this.onChange(e)}" type="${this.type}" id="${this.id}" name="${this.name}" required="${this.required}">
+                <input type="${this.type}" id="${this.id}" name="${this.name}" required="${this.required}">
                 <span class="error">${this.error ? this.errorMessage : ''}</span>
             </div>
         `;
@@ -113,12 +113,12 @@ export class RadioInput extends Input{
     }
     render(){
         return `
-            <div>
+            <div id="${this.id}">
                 <label>${this.label}</label>
                 ${this.options.map(option => `
                     <div>
                         <label for="${this.id}_${option.value}">${option.label}</label>
-                        <input onChange="(e)=>{this.onChange(e)}" type="${this.type}" id="${this.id}_${option.value}" name="${this.name}" value="${option.value}" required="${this.required}">
+                        <input type="${this.type}" id="${this.id}_${option.value}" name="${this.name}" value="${option.value}" required="${this.required}">
                     </div>
                 `).join('')}
                 <span class="error">${this.error ? this.errorMessage : ''}</span>
@@ -144,9 +144,9 @@ export class DateInput extends Input{
     }
     render(){
         return `
-            <div>
+            <div">
                 <label for="${this.id}">${this.label}</label>
-                <input onChange="(e)=>{this.onChange(e)}" type="${this.type}" id="${this.id}" name="${this.name}" required="${this.required}">
+                <input type="${this.type}" id="${this.id}" name="${this.name}" required="${this.required}">
                 <span class="error">${this.error ? this.errorMessage : ''}</span>
             </div>
         `;
@@ -172,7 +172,7 @@ export class EmailInput extends Input{
         return `
             <div>
                 <label for="${this.id}">${this.label}</label>
-                <input onChange="(e)=>{this.onChange(e)}" type="${this.type}" id="${this.id}" name="${this.name}" required="${this.required}">
+                <input type="${this.type}" id="${this.id}" name="${this.name}" required="${this.required}">
                 <span class="error">${this.error ? this.errorMessage : ''}</span>
             </div>
         `;
@@ -189,7 +189,7 @@ export class NumberInput extends Input{
         return `
             <div>
                 <label for="${this.id}">${this.label}</label>
-                <input onChange="(e)=>{this.onChange(e)}" type="${this.type}" id="${this.id}" name="${this.name}" required="${this.required}">
+                <input type="${this.type}" id="${this.id}" name="${this.name}" required="${this.required}">
                 <span class="error">${this.error ? this.errorMessage : ''}</span>
             </div>
         `;
