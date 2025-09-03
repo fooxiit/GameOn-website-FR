@@ -1,11 +1,16 @@
 class Input{
-    constructor({id,name,label,required = false,error = false,errorMessage}){
+    constructor({id,name,label,required = false,error = false,errorMessage,validate = () => {}}){
         this.id = id
         this.name = name
         this.label = label
         this.required = required
         this.error = error
         this.errorMessage = errorMessage
+        this.validate = validate
+    }
+    validate(e){
+        this.error = this.validate(e)
+        return this.error
     }
 }
 
