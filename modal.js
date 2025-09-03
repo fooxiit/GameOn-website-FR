@@ -15,10 +15,10 @@ const formData = document.querySelectorAll(".formData");
 const formHTML = document.querySelector("#form-reserve")
 const submitSucess = document.querySelector(".submit-sucess")
 
-const FirstNameFiels = document.querySelector("#firsname-field")
-const BirthDateFiels = document.querySelector("#birthdate-field")
-const LocationFiels = document.querySelector("#loction-field")
-const CguFiels = document.querySelector("#cgu-field")
+const FirstNameField = document.querySelector("#firstname-field")
+const BirthDateField = document.querySelector("#birthdate-field")
+const LocationField = document.querySelector("#location-field")
+const CguField = document.querySelector("#cgu-field")
 
 /**
  * 
@@ -67,33 +67,33 @@ function validateForm(form){
   if(!form.has("cgu")){
     err = true
     console.log("cgu error")
-    CguFiels.classList.add("field-error")
+    CguField.classList.add("field-error")
   }else{
-    CguFiels.classList.remove("field-error")
+    CguField.classList.remove("field-error")
   }
 
   if(!form.has("location")){
     err = true
     console.log("location error")
-    LocationFiels.classList.add("field-error")
+    LocationField.classList.add("field-error")
   }else{
-    LocationFiels.classList.remove("field-error")
+    LocationField.classList.remove("field-error")
   }
 
   if(!new RegExp("\\w{2,}").test(form.get("first"))){
     err = true
     console.log("name error")
-    FirstNameFiels.classList.add("field-error")
+    FirstNameField.classList.add("field-error")
   }else{
-    FirstNameFiels.classList.remove("field-error")
+    FirstNameField.classList.remove("field-error")
   }
 
   if(isNaN(new Date(form.get("birthdate")))){
     err = true
     console.log("birthdate error")
-    BirthDateFiels.classList.add("field-error")
+    BirthDateField.classList.add("field-error")
   }else{
-    BirthDateFiels.classList.remove("field-error")
+    BirthDateField.classList.remove("field-error")
   }
 
   return !err
