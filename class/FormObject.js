@@ -1,5 +1,6 @@
 export class formObject{
-    constructor({fields,submitCallback,submitButtonText,onRender=()=>{}}){
+    constructor({id,fields,submitCallback,submitButtonText,onRender=()=>{}}){
+       this.id = id
        this.fields = fields
        this.submitCallback = submitCallback
        this.submitButtonText = submitButtonText
@@ -33,17 +34,17 @@ export class formObject{
     render(){
         this.abortController.abort();
         const formHTML = `
-            <form onSubmit="(e)=>{this.submit(e)}">
+            <form id="${this.id}">
                 ${this.fields.map(field => field.render()).join('')}
                 <button type="submit">${this.submitButtonText}</button>
             </form>
         `;
         this.onRender(formHTML);
+        const formElement = document.querySelector(`#${this.id}`);
+        formElement.addEventListener('submit', (e) => this.submit(e));
         this.fields.forEach(field => {
-            console.log(field.id);
             if(field.type === "radio"){
                 const radioDiv = document.querySelector(`#${field.id}`);
-                console.log(radioDiv);
                 radioDiv.querySelectorAll('input').forEach(radio => {
                     radio.addEventListener('change', {signal: this.abortController.signal}, (e) => {
                         field.onChange(e);
