@@ -9,8 +9,13 @@ class Input{
         this.validate = validate
     }
     validate(){
-        this.error = this.validate(this.value)
-        return this.error
+        return new Promise((resolve,reject)=>{
+            this.error = this.validate(this.value)
+            if(this.error){
+                reject(this.error)
+            }
+            resolve(this.error)
+        })
     }
 
     onChange(e){
