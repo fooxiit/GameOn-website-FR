@@ -7,21 +7,24 @@ class Input{
      * @param {Boolean} required - Indique si le champ est requis.
      * @param {Boolean} error - Indique si le champ a une erreur.
      * @param {String} errorMessage - Le message d'erreur à afficher.
-     * @param {Function} validate - La fonction de validation du champ.
+     * @param {Function} validateCallback - La fonction de validation du champ.
      */
-    constructor({id,name,label,required = false,error = false,errorMessage,validate = () => {}}){
+    constructor({id,name,label,required = false,error = false,errorMessage,validateCallback = () => true}){
         this.id = id
         this.name = name
         this.label = label
         this.required = required
         this.error = error
         this.errorMessage = errorMessage
-        this.validate = validate
+        this.validateCallback = validateCallback
+        this.value = ""
     }
     validate(){
         return new Promise((resolve,reject)=>{
-            this.error = this.validate(this.value)
+            this.error = !this.validateCallback(this.value)
+            console.log(this.error)
             if(this.error){
+                console.log("Validation error on ", this.name)
                 reject(this.error)
             }
             resolve(this.error)
@@ -30,6 +33,7 @@ class Input{
 
     onChange(e){
         this.value = e.target.value
+        console.log("Value changed:", this.value)
     }
 }
 
@@ -44,10 +48,11 @@ class Input{
  * @param {Boolean} required - Indique si le champ est requis.
  * @param {Boolean} error - Indique si le champ a une erreur.
  * @param {String} errorMessage - Le message d'erreur à afficher.
+ * @param {Function} validateCallback - La fonction de validation du champ.
  */
 export class TextInput extends Input{
-    constructor({id,name,placeholder,label,minLength,maxLength,required,error,errorMessage,validate}){
-        super({id,name,label,required,error,errorMessage,validate})
+    constructor({id,name,placeholder,label,minLength,maxLength,required,error,errorMessage,validateCallback = () => true}){
+        super({id,name,label,required,error,errorMessage,validateCallback})
         this.type = "text"
         this.minLength = minLength
         this.maxLength = maxLength
@@ -58,7 +63,7 @@ export class TextInput extends Input{
         return `
             <div>
                 <label for="${this.id}">${this.label}</label>
-                <input  type="${this.type}" id="${this.id}" name="${this.name}" placeholder="${this.placeholder}" minlength="${this.minLength}" maxlength="${this.maxLength}" required="${this.required}">
+                <input value="${this.value}" type="${this.type}" id="${this.id}" name="${this.name}" placeholder="${this.placeholder}" minlength="${this.minLength}" maxlength="${this.maxLength}" ${this.required && 'required'}>
                 <span class="error">${this.error ? this.errorMessage : ''}</span>
             </div>
         `;
@@ -73,11 +78,11 @@ export class TextInput extends Input{
  * @param {Boolean} required - Indique si le champ est requis.
  * @param {Boolean} error - Indique si le champ a une erreur.
  * @param {String} errorMessage - Le message d'erreur à afficher.
- * @param {Function} validate - La fonction de validation du champ.
+ * @param {Function} validateCallback - La fonction de validation du champ.
  */
 export class CheckboxInput extends Input{
-    constructor({id,name,label,required,error,errorMessage,validate}){
-        super({id,name,label,required,error,errorMessage,validate})
+    constructor({id,name,label,required,error,errorMessage,validateCallback = () => true}){
+        super({id,name,label,required,error,errorMessage,validateCallback})
         this.type = "checkbox"
     }
     onChange(e){
@@ -87,7 +92,7 @@ export class CheckboxInput extends Input{
         return `
             <div>
                 <label for="${this.id}">${this.label}</label>
-                <input type="${this.type}" id="${this.id}" name="${this.name}" required="${this.required}">
+                <input type="${this.type}" id="${this.id}" name="${this.name}" ${this.required && 'required'}>
                 <span class="error">${this.error ? this.errorMessage : ''}</span>
             </div>
         `;
@@ -103,22 +108,22 @@ export class CheckboxInput extends Input{
  * @param {Boolean} error - Indique si le champ a une erreur.
  * @param {String} errorMessage - Le message d'erreur à afficher.
  * @param {Array} options - Les options du champ de saisie.
- * @param {Function} validate - La fonction de validation du champ.
+ * @param {Function} validateCallback - La fonction de validation du champ.
  */
 export class RadioInput extends Input{
-    constructor({id,name,label,required,error,errorMessage,options,validate}){
-        super({id,name,label,required,error,errorMessage,validate})
+    constructor({id,name,label,required,error,errorMessage,options,validateCallback = () => true}){
+        super({id,name,label,required,error,errorMessage,validateCallback})
         this.type = "radio"
         this.options = options
     }
     render(){
         return `
             <div id="${this.id}">
-                <label>${this.label}</label>
+                <span>${this.label}</span>
                 ${this.options.map(option => `
                     <div>
                         <label for="${this.id}_${option.value}">${option.label}</label>
-                        <input type="${this.type}" id="${this.id}_${option.value}" name="${this.name}" value="${option.value}" required="${this.required}">
+                        <input type="${this.type}" id="${this.id}_${option.value}" name="${this.name}" value="${option.value}" ${this.required && 'required'}>
                     </div>
                 `).join('')}
                 <span class="error">${this.error ? this.errorMessage : ''}</span>
@@ -135,18 +140,18 @@ export class RadioInput extends Input{
  * @param {Boolean} required - Indique si le champ est requis.
  * @param {Boolean} error - Indique si le champ a une erreur.
  * @param {String} errorMessage - Le message d'erreur à afficher.
- * @param {Function} validate - La fonction de validation du champ.
+ * @param {Function} validateCallback - La fonction de validation du champ.
  */
 export class DateInput extends Input{
-    constructor({id,name,label,required,error,errorMessage,validate}){
-        super({id,name,label,required,error,errorMessage,validate})
+    constructor({id,name,label,required,error,errorMessage,validateCallback = () => true}){
+        super({id,name,label,required,error,errorMessage,validateCallback})
         this.type = "date"
     }
     render(){
         return `
-            <div">
+            <div>
                 <label for="${this.id}">${this.label}</label>
-                <input type="${this.type}" id="${this.id}" name="${this.name}" required="${this.required}">
+                <input type="${this.type}" id="${this.id}" name="${this.name}" ${this.required && 'required'}>
                 <span class="error">${this.error ? this.errorMessage : ''}</span>
             </div>
         `;
@@ -161,18 +166,18 @@ export class DateInput extends Input{
  * @param {Boolean} required - Indique si le champ est requis.
  * @param {Boolean} error - Indique si le champ a une erreur.
  * @param {String} errorMessage - Le message d'erreur à afficher.
- * @param {Function} validate - La fonction de validation du champ.
+ * @param {Function} validateCallback - La fonction de validation du champ.
  */
 export class EmailInput extends Input{
-    constructor({id,name,label,required,error,errorMessage,validate}){
-        super({id,name,label,required,error,errorMessage,validate })
+    constructor({id,name,label,required,error,errorMessage,validateCallback = () => true}){
+        super({id,name,label,required,error,errorMessage,validateCallback })
         this.type = "email"
     }
     render(){
         return `
             <div>
                 <label for="${this.id}">${this.label}</label>
-                <input type="${this.type}" id="${this.id}" name="${this.name}" required="${this.required}">
+                <input type="${this.type}" id="${this.id}" name="${this.name}" ${this.required && 'required'}>
                 <span class="error">${this.error ? this.errorMessage : ''}</span>
             </div>
         `;
@@ -181,15 +186,15 @@ export class EmailInput extends Input{
 }
 
 export class NumberInput extends Input{
-    constructor({id,name,label,required,error,errorMessage,validate}){
-        super({id,name,label,required,error,errorMessage,validate})
+    constructor({id,name,label,required,error,errorMessage,validateCallback = () => true}){
+        super({id,name,label,required,error,errorMessage,validateCallback})
         this.type = "number"
     }
     render(){
         return `
             <div>
                 <label for="${this.id}">${this.label}</label>
-                <input type="${this.type}" id="${this.id}" name="${this.name}" required="${this.required}">
+                <input type="${this.type}" id="${this.id}" name="${this.name}" ${this.required && 'required'}>
                 <span class="error">${this.error ? this.errorMessage : ''}</span>
             </div>
         `;
