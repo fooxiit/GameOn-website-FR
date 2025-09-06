@@ -312,6 +312,11 @@ input[data-error]::after {
   left: 21%;
   top: 19%;
 }
+.radio-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
 .close {
   position: absolute;
   right: 15px;
