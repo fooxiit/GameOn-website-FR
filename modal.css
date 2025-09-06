@@ -157,7 +157,7 @@ main {
   font-size: 16px;
 }
 
-.bground {
+.modal-bground {
   position: fixed;
   z-index: 1;
   left: 0;
@@ -168,7 +168,7 @@ main {
   background-color: rgba(26, 39, 156, 0.4);
 }
 
-.content {
+.modal-content {
   margin: 5% auto;
   width: 100%;
   max-width: 500px;
@@ -317,7 +317,7 @@ input[data-error]::after {
   flex-wrap: wrap;
   gap: 5px;
 }
-.close {
+.modal-close {
   position: absolute;
   right: 15px;
   top: 15px;
@@ -327,8 +327,8 @@ input[data-error]::after {
   cursor: pointer;
   transform: scale(0.7);
 }
-.close:before,
-.close:after {
+.modal-close:before,
+.modal-close:after {
   position: absolute;
   left: 15px;
   content: " ";
@@ -336,10 +336,10 @@ input[data-error]::after {
   width: 3px;
   background-color: #fff;
 }
-.close:before {
+.modal-close:before {
   transform: rotate(45deg);
 }
-.close:after {
+.modal-close:after {
   transform: rotate(-45deg);
 }
 .btn-submit,
