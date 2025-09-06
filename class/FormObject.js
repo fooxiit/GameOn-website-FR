@@ -26,13 +26,13 @@ export class formObject{
                 this.submitCallback(this.getValues());
             })
             .catch(error => {
-                console.error("Validation failed:", error);
-                //this.render()
+                this.render()
             });
     }
 
     render(){
         this.abortController.abort();
+        this.abortController = new AbortController();
         const formHTML = `
             <form id="${this.id}">
                 ${this.fields.map(field => field.render()).join('')}
@@ -46,14 +46,14 @@ export class formObject{
             if(field.type === "radio"){
                 const radioDiv = document.querySelector(`#${field.id}`);
                 radioDiv.querySelectorAll('input').forEach(radio => {
-                    radio.addEventListener('change', {signal: this.abortController.signal}, (e) => {
+                    radio.addEventListener('change', (e) => {
                         field.onChange(e);
                     });
                 });
                 
             }else{
                 const fieldHtml = document.querySelector(`#${field.id}`);
-                fieldHtml.addEventListener('change', {signal: this.abortController.signal}, (e) => {
+                fieldHtml.addEventListener('change', (e) => {
                     field.onChange(e);
                 });
             }
