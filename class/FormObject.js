@@ -6,6 +6,7 @@ export class formObject{
        this.submitButtonText = submitButtonText
        this.onRender = onRender
        this.abortController = new AbortController();
+       this.render = this.render.bind(this);
     }
 
    
