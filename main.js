@@ -1,7 +1,7 @@
 import { formObject } from "./class/FormObject.js";
 import { CheckboxInput, DateInput, EmailInput, NumberInput, RadioInput, TextInput } from "./class/Input.js";
 
-const modalContent = document.getElementById("modal-content");
+const modalBody = document.querySelector(".modal-body");
 const registerForm = new formObject({
         id: "register-form",
         fields:[
@@ -89,7 +89,7 @@ const registerForm = new formObject({
         submitCallback: (values) => {console.log(values,'test')},
         submitButtonText: "C'est parti",
         onRender: (formElement) => {
-            modalContent.innerHTML = formElement;
+            modalBody.innerHTML = formElement;
         }
 });
 
