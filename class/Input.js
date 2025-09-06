@@ -61,7 +61,7 @@ export class TextInput extends Input{
 
     render(){
         return `
-            <div class="formData ${this.error && 'field-error'}">
+            <div class="formData ${this.error ? 'field-error' : ''}">
                 <label class="text-label" for="${this.id}">${this.label}</label>
                 <input  class="text-control" value="${this.value}" type="${this.type}" id="${this.id}" name="${this.name}" placeholder="${this.placeholder}" minlength="${this.minLength}" maxlength="${this.maxLength}" ${this.required && 'required'}>
                 <span class="error">${this.error ? this.errorMessage : ''}</span>
@@ -90,7 +90,7 @@ export class CheckboxInput extends Input{
     }
     render(){
         return `
-            <div class="formData ${this.error && 'field-error'}">
+            <div class="formData ${this.error ? 'field-error' : ''}">
                 <input class="checkbox-input" ${this.value && "checked"} type="${this.type}" id="${this.id}" name="${this.name}" ${this.required && 'required'}>
                 <label class="checkbox2-label" for="${this.id}">
                     <i class="checkbox-icon"></i>
@@ -121,7 +121,7 @@ export class RadioInput extends Input{
     }
     render(){
         return `
-            <div class="formData ${this.error && 'field-error'}" id="${this.id}">
+            <div class="formData ${this.error ? 'field-error' : ''}" id="${this.id}">
                 <label class="text-label" for="${this.id}">${this.label}</label>
                 ${this.options.map(option => `
                     <div>
@@ -155,7 +155,7 @@ export class DateInput extends Input{
     }
     render(){
         return `
-            <div class="formData ${this.error && 'field-error'}">
+            <div class="formData ${this.error ? 'field-error' : ''}">
                 <label class="text-label" for="${this.id}">${this.label}</label>
                 <input class="text-control" value="${this.value}" type="${this.type}" id="${this.id}" name="${this.name}" ${this.required && 'required'}>
                 <span class="error">${this.error ? this.errorMessage : ''}</span>
@@ -181,7 +181,7 @@ export class EmailInput extends Input{
     }
     render(){
         return `
-            <div class="formData ${this.error && 'field-error'}">
+            <div class="formData ${this.error ? 'field-error' : ''}">
                 <label class="text-label" for="${this.id}">${this.label}</label>
                 <input class="text-control" value="${this.value}" type="${this.type}" id="${this.id}" name="${this.name}" ${this.required && 'required'}>
                 <span class="error">${this.error ? this.errorMessage : ''}</span>
@@ -198,7 +198,7 @@ export class NumberInput extends Input{
     }
     render(){
         return `
-            <div class="formData ${this.error && 'field-error'}">
+            <div class="formData ${this.error ? 'field-error' : ''}">
                 <label class="text-label" for="${this.id}">${this.label}</label>
                 <input class="text-control" value="${this.value}" type="${this.type}" id="${this.id}" name="${this.name}" ${this.required && 'required'}>
                 <span class="error">${this.error ? this.errorMessage : ''}</span>
