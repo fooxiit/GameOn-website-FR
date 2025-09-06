@@ -123,7 +123,7 @@ export class RadioInput extends Input{
                 ${this.options.map(option => `
                     <div>
                         <label for="${this.id}_${option.value}">${option.label}</label>
-                        <input type="${this.type}" id="${this.id}_${option.value}" name="${this.name}" value="${option.value}" ${this.required && 'required'}>
+                        <input type="${this.type}" ${this.value === option.value && "checked"} id="${this.id}_${option.value}" name="${this.name}" value="${option.value}" ${this.required && 'required'}>
                     </div>
                 `).join('')}
                 <span class="error">${this.error ? this.errorMessage : ''}</span>
