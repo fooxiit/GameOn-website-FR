@@ -52,6 +52,11 @@ const registerForm = new formObject({
                 placeholder:""
             }),
             new RadioInput({
+                validateCallback:(value) => {
+                    if(!value) return false
+                    return true
+                },
+                errorMessage:"Vous devez choisir une option.",
                 id:"location",
                 name:"location",
                 label:"A quel tournoi souhaitez-vous participer cette année ?",
