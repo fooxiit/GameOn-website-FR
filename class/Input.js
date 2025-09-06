@@ -81,8 +81,8 @@ export class TextInput extends Input{
  * @param {Function} validateCallback - La fonction de validation du champ.
  */
 export class CheckboxInput extends Input{
-    constructor({id,name,label,required,error,errorMessage,validateCallback = () => true}){
-        super({id,name,label,required,error,errorMessage,validateCallback})
+    constructor({id,name,label,value=false,required,error,errorMessage,validateCallback = () => true}){
+        super({id,name,label,required,error,value,errorMessage,validateCallback})
         this.type = "checkbox"
     }
     onChange(e){
@@ -92,7 +92,7 @@ export class CheckboxInput extends Input{
         return `
             <div>
                 <label for="${this.id}">${this.label}</label>
-                <input type="${this.type}" id="${this.id}" name="${this.name}" ${this.required && 'required'}>
+                <input ${this.value && "checked"} type="${this.type}" id="${this.id}" name="${this.name}" ${this.required && 'required'}>
                 <span class="error">${this.error ? this.errorMessage : ''}</span>
             </div>
         `;
@@ -151,7 +151,7 @@ export class DateInput extends Input{
         return `
             <div>
                 <label for="${this.id}">${this.label}</label>
-                <input type="${this.type}" id="${this.id}" name="${this.name}" ${this.required && 'required'}>
+                <input value="${this.value}" type="${this.type}" id="${this.id}" name="${this.name}" ${this.required && 'required'}>
                 <span class="error">${this.error ? this.errorMessage : ''}</span>
             </div>
         `;
@@ -177,7 +177,7 @@ export class EmailInput extends Input{
         return `
             <div>
                 <label for="${this.id}">${this.label}</label>
-                <input type="${this.type}" id="${this.id}" name="${this.name}" ${this.required && 'required'}>
+                <input value="${this.value}" type="${this.type}" id="${this.id}" name="${this.name}" ${this.required && 'required'}>
                 <span class="error">${this.error ? this.errorMessage : ''}</span>
             </div>
         `;
@@ -194,7 +194,7 @@ export class NumberInput extends Input{
         return `
             <div>
                 <label for="${this.id}">${this.label}</label>
-                <input type="${this.type}" id="${this.id}" name="${this.name}" ${this.required && 'required'}>
+                <input value="${this.value}" type="${this.type}" id="${this.id}" name="${this.name}" ${this.required && 'required'}>
                 <span class="error">${this.error ? this.errorMessage : ''}</span>
             </div>
         `;
