@@ -1,7 +1,20 @@
 import { formObject } from "./class/FormObject.js";
 import { CheckboxInput, DateInput, EmailInput, NumberInput, RadioInput, TextInput } from "./class/Input.js";
+import { Modal, ModalMessage } from "./class/Modal.js";
 
 const modalBody = document.querySelector(".modal-body");
+const modalAnchor = document.querySelector("#modal-anchor");
+const modalBtn = document.querySelectorAll(".modal-btn");
+console.log(modalBtn)
+
+const modal = new Modal({
+    anchor: modalAnchor
+});
+
+const modalMessage = new ModalMessage({
+    message: `Merci pour <br> votre inscription`
+});
+
 const registerForm = new formObject({
         id: "register-form",
         fields:[
@@ -86,11 +99,20 @@ const registerForm = new formObject({
                 label:"Je souhaite être prévenu des prochains évènements."
             })
         ],
-        submitCallback: (values) => {console.log(values,'test')},
+        submitCallback: (values) => {
+            console.log(values,'test')
+            modal.update(modalMessage.render(() => modal.close()))
+        },
         submitButtonText: "C'est parti",
         onRender: (formElement) => {
-            modalBody.innerHTML = formElement;
+            modal.update(formElement)
         }
 });
 
-registerForm.render()
+
+modalBtn.forEach((btn) => btn.addEventListener("click",() => {
+    modal.open(() => {
+        registerForm.render();
+    });
+}));
+
