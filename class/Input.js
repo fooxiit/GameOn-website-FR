@@ -61,9 +61,9 @@ export class TextInput extends Input{
 
     render(){
         return `
-            <div>
-                <label for="${this.id}">${this.label}</label>
-                <input value="${this.value}" type="${this.type}" id="${this.id}" name="${this.name}" placeholder="${this.placeholder}" minlength="${this.minLength}" maxlength="${this.maxLength}" ${this.required && 'required'}>
+            <div class="formData">
+                <label class="text-label" for="${this.id}">${this.label}</label>
+                <input  class="text-control" value="${this.value}" type="${this.type}" id="${this.id}" name="${this.name}" placeholder="${this.placeholder}" minlength="${this.minLength}" maxlength="${this.maxLength}" ${this.required && 'required'}>
                 <span class="error">${this.error ? this.errorMessage : ''}</span>
             </div>
         `;
@@ -90,9 +90,9 @@ export class CheckboxInput extends Input{
     }
     render(){
         return `
-            <div>
-                <label for="${this.id}">${this.label}</label>
-                <input ${this.value && "checked"} type="${this.type}" id="${this.id}" name="${this.name}" ${this.required && 'required'}>
+            <div class="formData">
+                <label class="checkbox2-label" for="${this.id}">${this.label}</label>
+                <input class="checkbox-input" ${this.value && "checked"} type="${this.type}" id="${this.id}" name="${this.name}" ${this.required && 'required'}>
                 <span class="error">${this.error ? this.errorMessage : ''}</span>
             </div>
         `;
@@ -118,12 +118,12 @@ export class RadioInput extends Input{
     }
     render(){
         return `
-            <div id="${this.id}">
+            <div class="formData" id="${this.id}">
                 <span>${this.label}</span>
                 ${this.options.map(option => `
                     <div>
-                        <label for="${this.id}_${option.value}">${option.label}</label>
-                        <input type="${this.type}" ${this.value === option.value && "checked"} id="${this.id}_${option.value}" name="${this.name}" value="${option.value}" ${this.required && 'required'}>
+                        <label class="checkbox-label" for="${this.id}_${option.value}">${option.label}</label>
+                        <input class="checkbox-input" type="${this.type}" ${this.value === option.value && "checked"} id="${this.id}_${option.value}" name="${this.name}" value="${option.value}" ${this.required && 'required'}>
                     </div>
                 `).join('')}
                 <span class="error">${this.error ? this.errorMessage : ''}</span>
@@ -149,9 +149,9 @@ export class DateInput extends Input{
     }
     render(){
         return `
-            <div>
-                <label for="${this.id}">${this.label}</label>
-                <input value="${this.value}" type="${this.type}" id="${this.id}" name="${this.name}" ${this.required && 'required'}>
+            <div class="formData">
+                <label class="text-label" for="${this.id}">${this.label}</label>
+                <input class="text-control" value="${this.value}" type="${this.type}" id="${this.id}" name="${this.name}" ${this.required && 'required'}>
                 <span class="error">${this.error ? this.errorMessage : ''}</span>
             </div>
         `;
@@ -175,9 +175,9 @@ export class EmailInput extends Input{
     }
     render(){
         return `
-            <div>
-                <label for="${this.id}">${this.label}</label>
-                <input value="${this.value}" type="${this.type}" id="${this.id}" name="${this.name}" ${this.required && 'required'}>
+            <div class="formData">
+                <label class="text-label" for="${this.id}">${this.label}</label>
+                <input class="text-control" value="${this.value}" type="${this.type}" id="${this.id}" name="${this.name}" ${this.required && 'required'}>
                 <span class="error">${this.error ? this.errorMessage : ''}</span>
             </div>
         `;
@@ -192,9 +192,9 @@ export class NumberInput extends Input{
     }
     render(){
         return `
-            <div>
-                <label for="${this.id}">${this.label}</label>
-                <input value="${this.value}" type="${this.type}" id="${this.id}" name="${this.name}" ${this.required && 'required'}>
+            <div class="formData">
+                <label class="text-label" for="${this.id}">${this.label}</label>
+                <input class="text-control" value="${this.value}" type="${this.type}" id="${this.id}" name="${this.name}" ${this.required && 'required'}>
                 <span class="error">${this.error ? this.errorMessage : ''}</span>
             </div>
         `;
