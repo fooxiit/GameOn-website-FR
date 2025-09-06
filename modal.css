@@ -180,7 +180,6 @@ main {
   position: relative;
   color: #fff;
   padding-top: 10px;
-  height: 850px;
 }
 
 .modal-body {
@@ -225,7 +224,7 @@ input {
   font-size: 20px;
   height: 48px;
 }
-.formData[data-error]::after {
+.field-error .error{
   content: attr(data-error);
   font-size: 0.4em;
   color: #e54858;
@@ -234,8 +233,8 @@ input {
   margin-bottom: 7px;
   text-align: right;
   line-height: 0.3;
-  opacity: 0;
   transition: 0.3s;
+  text-align: left;
 }
 .field-error.formData::after {
   opacity: 1;
@@ -534,9 +533,9 @@ footer {
     margin-top: 50px;
     text-align: center;
   }
-    .content {
+    /* .content {
     height: 657px;
-  }
+  } */
 }
 
 .hidden{
