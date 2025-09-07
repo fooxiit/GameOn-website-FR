@@ -64,7 +64,7 @@ export class ModalMessage{
             <div class="modal-message">
                 ${this.title ? `<h2>${this.title}</h2>` : ''}
                 <p>${this.message}</p>
-                <button class="btn-close">Fermer</button>
+                <button class="button btn-close">Fermer</button>
             </div>
         `;
     }
