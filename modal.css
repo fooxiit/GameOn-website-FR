@@ -9,11 +9,14 @@
   padding: 0;
 }
 /* Landing Page */
-
+html{
+  height: 100vh;
+}
 body {
   margin: 0;
   display: flex;
   flex-direction: column;
+  height: 100%;
   /* background-image: url("background.png"); */
   font-family: var(--font-default);
   font-size: 18px;
@@ -70,15 +73,14 @@ img {
   display: none;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 825px) {
   .topnav a {display: none;}
   .topnav a.icon {
     float: right;
     display: block;
   }
-}
 
-@media screen and (max-width: 768px) {
+  
   .topnav.responsive {position: relative;}
   .topnav.responsive .icon {
     position: absolute;
@@ -90,10 +92,8 @@ img {
     display: block;
     text-align: left;
   }
+
 }
-
-
-
  @media screen and (max-width: 540px) {
   .topnav a {display: none;}
   .topnav a.icon {
@@ -104,6 +104,7 @@ img {
 } 
 
 main {
+  position: relative;
   font-size: 130%;
   font-weight: bolder;
   color: black;
@@ -113,6 +114,9 @@ main {
   margin: 1px 20px 15px;
   border-radius: 2rem;
   text-align: justify;
+  flex-grow: 1;
+  flex-shrink: 1;
+  overflow: hidden;
 }
 
 .modal-btn {
@@ -443,7 +447,6 @@ input[data-error]::after {
   font-size: 16px;
 }
 .hero-section {
-  min-height: 93vh;
   border-radius: 10px;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
@@ -511,6 +514,7 @@ input[data-error]::after {
   height: 100%;
   display: block;
   padding: 0;
+  object-fit: cover;
 }
 .copyrights {
   color: #fe142f;
@@ -529,13 +533,16 @@ footer {
 }
 @media screen and (max-width: 800px) {
   .hero-section {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
     box-shadow: unset;
   }
   .hero-content {
     background: #fff;
     color: #000;
     padding: 20px;
+    margin: auto;
   }
   .hero-content::after {
     content: unset;
@@ -551,9 +558,14 @@ footer {
     width: unset;
     font-size: 1.5rem;
   }
+  .hero-img{
+    flex-shrink: 1;
+    flex-grow: 1;
+    overflow: hidden;
+  }
   .hero-img img {
     border-radius: 10px;
-    margin-top: 40px;
+    object-fit: cover;
   }
   .hero-section > .btn-signup {
     display: block;
@@ -564,9 +576,13 @@ footer {
     margin-top: 50px;
     text-align: center;
   }
-    /* .content {
-    height: 657px;
-  } */
+  .modal-bground{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
 }
 
 .hidden{
