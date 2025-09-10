@@ -35,7 +35,7 @@ export class formObject{
         this.abortController.abort();
         this.abortController = new AbortController();
         const formHTML = `
-            <form id="${this.id}" name="${this.id}">
+            <form id="${this.id}" name="${this.id}" novalidate>
                 ${this.fields.map(field => field.render()).join('')}
                 <button class="btn-submit" type="submit">${this.submitButtonText}</button>
             </form>

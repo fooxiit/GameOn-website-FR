@@ -38,12 +38,23 @@ const registerForm = new formObject({
                 name:"last",
                 label:"Nom",
                 placeholder:"Votre nom",
+                errorMessage:"Veuillez entrer 2 caractères ou plus pour le champ du nom.",
+                validateCallback:(value) => {
+                    console.log("validate first",value)
+                    if(!value) return false
+                    return new RegExp("\\w{2,}").test(value)      
+                }
             }),
             new EmailInput({
                 id:"email",
                 name:"email",
                 label:"Email",
                 placeholder:"Votre email",
+                errorMessage:"Veuillez entrer une adresse email valide.",
+                validateCallback:(value) => {
+                    if(!value) return false
+                    return new RegExp("^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$").test(value)
+                }
             }),
             new DateInput({
                 id:"birthdate",
@@ -62,7 +73,13 @@ const registerForm = new formObject({
                 id:"quantity",
                 name:"quantity",
                 label:"À combien de tournois GameOn avez-vous déjà participé ?",
-                placeholder:""
+                placeholder:"",
+                errorMessage:"Veuillez entrer un nombre valide.",
+                validateCallback:(value) => {
+                    console.log("validate first",value)
+                    if(!value) return false
+                    return new RegExp("[0-9]{1,}").test(value)      
+                }
             }),
             new RadioInput({
                 validateCallback:(value) => {
