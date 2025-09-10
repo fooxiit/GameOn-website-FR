@@ -34,9 +34,9 @@ class Input{
             }
             this.#firstValidation = false
             this.error = !this.validateCallback(this.value)
-            console.log(this.error)
+            
             if(this.error){
-                console.log("Validation error on ", this.name)
+                
                 reject(this.error)
             }
             resolve(this.error)
@@ -45,7 +45,7 @@ class Input{
 
     onChange(e){
         this.value = e.target.value
-        console.log("Value changed:", this.value)
+        
     }
 }
 
@@ -81,7 +81,7 @@ export class TextInput extends Input{
         if(this.value === this.#previousValue && this.#previousRender && !this.#firstRender){
             return this.#previousRender
         }
-        console.log(`TextInput id ${this.id} render called`)
+        
         if(!this.#firstRender) this.#previousValue = this.value
         this.#firstRender = false
         this.#previousRender = `
@@ -123,7 +123,7 @@ export class CheckboxInput extends Input{
         if(this.value === this.#previousValue && this.#previousRender && !this.#firstRender){
             return this.#previousRender
         }
-        console.log(`CheckboxInput id ${this.id} render called`)
+        
         if(!this.#firstRender) this.#previousValue = this.value
         this.#firstRender = false
         this.#previousRender = `
@@ -167,7 +167,7 @@ export class RadioInput extends Input{
         if(this.value === this.#previousValue && this.#previousRender && !this.#firstRender){
             return this.#previousRender
         }
-        console.log(`RadioInput id ${this.id} render called`)
+        
         if(!this.#firstRender) this.#previousValue = this.value
         this.#firstRender = false
         this.#previousRender = `
@@ -216,7 +216,7 @@ export class DateInput extends Input{
         if(this.value === this.#previousValue && this.#previousRender && !this.#firstRender){
             return this.#previousRender
         }
-        console.log(`DateInput id ${this.id} render called`)
+        
         if(!this.#firstRender) this.#previousValue = this.value
         this.#firstRender = false
         this.#previousRender = `
@@ -255,7 +255,7 @@ export class EmailInput extends Input{
         if(this.value === this.#previousValue && this.#previousRender && !this.#firstRender){
             return this.#previousRender
         }
-        console.log(`EmailInput id ${this.id} render called`)
+        
         if(!this.#firstRender) this.#previousValue = this.value
         this.#firstRender = false
         this.#previousRender = `
@@ -285,7 +285,7 @@ export class NumberInput extends Input{
         if(this.value === this.#previousValue && this.#previousRender && !this.#firstRender){
             return this.#previousRender
         }
-        console.log(`NumberInput id ${this.id} render called`)
+        
         if(!this.#firstRender) this.#previousValue = this.value
         this.#firstRender = false
 

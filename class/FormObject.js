@@ -25,7 +25,7 @@ export class formObject{
     }
 
     submit(e){
-        console.log("Form submitted");
+        
         e.preventDefault();
         Promise.all(this.fields.map(field => field.validate()))
             .then(() => {

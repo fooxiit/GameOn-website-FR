@@ -43,7 +43,7 @@ export class Modal {
         });
     }
     update(body) {
-        console.log(this.bodyElement)
+        
         if (!this.bodyElement) return
         this.bodyElement.innerHTML = body;
         const closeButton = this.bodyElement.querySelectorAll('.btn-close');

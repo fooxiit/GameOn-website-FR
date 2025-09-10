@@ -5,7 +5,7 @@ import { Modal, ModalMessage } from "./class/Modal.js";
 const modalBody = document.querySelector(".modal-body");
 const modalAnchor = document.querySelector("#modal-anchor");
 const modalBtn = document.querySelectorAll(".modal-btn");
-console.log(modalBtn)
+
 
 const modal = new Modal({
     anchor: modalAnchor
@@ -28,7 +28,6 @@ const registerForm = new formObject({
                 error:false,
                 errorMessage:"Veuillez entrer 2 caractères ou plus pour le champ du nom.",
                 validateCallback:(value) => {
-                    console.log("validate first",value)
                     if(!value) return false
                     return new RegExp("\\w{2,}").test(value)      
                 }
@@ -40,7 +39,7 @@ const registerForm = new formObject({
                 placeholder:"Votre nom",
                 errorMessage:"Veuillez entrer 2 caractères ou plus pour le champ du nom.",
                 validateCallback:(value) => {
-                    console.log("validate first",value)
+                    
                     if(!value) return false
                     return new RegExp("\\w{2,}").test(value)      
                 }
@@ -76,7 +75,7 @@ const registerForm = new formObject({
                 placeholder:"",
                 errorMessage:"Veuillez entrer un nombre valide.",
                 validateCallback:(value) => {
-                    console.log("validate first",value)
+                    
                     if(!value) return false
                     return new RegExp("[0-9]{1,}").test(value)      
                 }
@@ -117,7 +116,7 @@ const registerForm = new formObject({
             })
         ],
         submitCallback: (values) => {
-            console.log(values,'test')
+            
             modal.update(modalMessage.render(() => modal.close()))
         },
         submitButtonText: "C'est parti",

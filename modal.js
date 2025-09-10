@@ -64,7 +64,7 @@ function validateForm(form){
   
   if(!form.has("cgu")){
     err = true
-    console.log("cgu error")
+    
     CguField.classList.add("field-error")
   }else{
     CguField.classList.remove("field-error")
@@ -72,7 +72,7 @@ function validateForm(form){
 
   if(!form.has("location")){
     err = true
-    console.log("location error")
+    
     LocationField.classList.add("field-error")
   }else{
     LocationField.classList.remove("field-error")
@@ -80,7 +80,7 @@ function validateForm(form){
 
   if(!new RegExp("\\w{2,}").test(form.get("first"))){
     err = true
-    console.log("name error")
+    
     FirstNameField.classList.add("field-error")
   }else{
     FirstNameField.classList.remove("field-error")
@@ -88,7 +88,7 @@ function validateForm(form){
 
   if(isNaN(new Date(form.get("birthdate")))){
     err = true
-    console.log("birthdate error")
+    
     BirthDateField.classList.add("field-error")
   }else{
     BirthDateField.classList.remove("field-error")
