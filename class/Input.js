@@ -125,7 +125,7 @@ export class RadioInput extends Input{
                 <label class="text-label" for="${this.id}">${this.label}</label>
                 <div class="radio-options">
                     ${this.options.map(option => `
-                        <div>
+                        <div class="radio-option">
                                 <input class="checkbox-input" type="${this.type}" ${this.value === option.value && "checked"} id="${this.id}_${option.value}" name="${this.name}" value="${option.value}" ${this.required && 'required'}>
                             <label class="checkbox-label" for="${this.id}_${option.value}">
                                 <i class="checkbox-icon"></i>

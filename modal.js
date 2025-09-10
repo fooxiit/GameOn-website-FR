@@ -1,10 +1,8 @@
 function editNav() {
-  var x = document.getElementById("myTopnav");
-  if (x.className === "topnav") {
-    x.className += " responsive";
-  } else {
-    x.className = "topnav";
-  }
+  const topnavIcon = document.getElementById("topnav-icon");
+  const x = document.getElementById("myTopnav");
+  x.classList.toggle("responsive");
+  topnavIcon.classList.toggle("active");
 }
 
 // DOM Elements
