@@ -133,7 +133,7 @@ const registerForm = new formObject({
         }
 });
 
-
+// Gestion de l'ouverture de la modale
 modalBtn.forEach((btn) => btn.addEventListener("click",() => {
     modal.open(() => {
         registerForm.render();

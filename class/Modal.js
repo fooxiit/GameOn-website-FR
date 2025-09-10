@@ -30,6 +30,8 @@ export class Modal {
     close() {
         this.anchor.innerHTML = '';
         this.bodyElement = null;
+        this.abortController.abort();
+        this.abortController = new AbortController();
     }
     open(onOpen) {
         this.abortController.abort();
