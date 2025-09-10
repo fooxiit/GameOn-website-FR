@@ -1,20 +1,28 @@
 import { formObject } from "./class/FormObject.js";
 import { CheckboxInput, DateInput, EmailInput, NumberInput, RadioInput, TextInput } from "./class/Input.js";
 import { Modal, ModalMessage } from "./class/Modal.js";
+import { editNav } from "./nav.js";
 
+// récupération des éléments du DOM
 const modalBody = document.querySelector(".modal-body");
 const modalAnchor = document.querySelector("#modal-anchor");
 const modalBtn = document.querySelectorAll(".modal-btn");
 
+// Gestion de la navigation
+const topnavIcon = document.querySelector("#topnav-icon");
+topnavIcon.addEventListener("click", editNav);
 
+//instanciation de la modale
 const modal = new Modal({
     anchor: modalAnchor
 });
 
+//instanciation du message de la modale
 const modalMessage = new ModalMessage({
     message: `Merci pour <br> votre inscription`
 });
 
+//instanciation du formulaire d'inscription
 const registerForm = new formObject({
         id: "register-form",
         fields:[
