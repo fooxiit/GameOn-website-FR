@@ -1,4 +1,10 @@
 class Input{
+    // valeur privée
+    #previousValue = null;
+    #previousRender = null;
+    #firstValidation = true;
+    #firstRender = true;
+
     /**
      * 
      * @param {String} id - L'identifiant du champ.
@@ -21,6 +27,12 @@ class Input{
     }
     validate(){
         return new Promise((resolve,reject)=>{
+            if(this.value === this.#previousValue && !this.#firstValidation){
+                if(this.error) reject(this.error)
+                resolve(this.error)
+                return
+            }
+            this.#firstValidation = false
             this.error = !this.validateCallback(this.value)
             console.log(this.error)
             if(this.error){
@@ -51,6 +63,12 @@ class Input{
  * @param {Function} validateCallback - La fonction de validation du champ.
  */
 export class TextInput extends Input{
+    // valeur privée
+    #previousValue = null;
+    #previousRender = null;
+    #firstValidation = true;
+    #firstRender = true;
+
     constructor({id,name,placeholder,label,minLength,maxLength,required,error,errorMessage,validateCallback = () => true}){
         super({id,name,label,required,error,errorMessage,validateCallback})
         this.type = "text"
@@ -60,13 +78,20 @@ export class TextInput extends Input{
     }
 
     render(){
-        return `
+        if(this.value === this.#previousValue && this.#previousRender && !this.#firstRender){
+            return this.#previousRender
+        }
+        console.log(`TextInput id ${this.id} render called`)
+        if(!this.#firstRender) this.#previousValue = this.value
+        this.#firstRender = false
+        this.#previousRender = `
             <div class="formData ${this.error ? 'field-error' : ''}">
                 <label class="text-label" for="${this.id}">${this.label}</label>
                 <input  class="text-control" value="${this.value}" type="${this.type}" id="${this.id}" name="${this.name}" placeholder="${this.placeholder}" minlength="${this.minLength}" maxlength="${this.maxLength}" ${this.required && 'required'}>
                 <span class="error">${this.error ? this.errorMessage : ''}</span>
             </div>
         `;
+        return this.#previousRender
     }
 }
 
@@ -81,6 +106,12 @@ export class TextInput extends Input{
  * @param {Function} validateCallback - La fonction de validation du champ.
  */
 export class CheckboxInput extends Input{
+    // valeur privée
+    #previousValue = null;
+    #previousRender = null;
+    #firstValidation = true;
+    #firstRender = true;
+
     constructor({id,name,label,value=false,required,error,errorMessage,validateCallback = () => true}){
         super({id,name,label,required,error,value,errorMessage,validateCallback})
         this.type = "checkbox"
@@ -89,7 +120,13 @@ export class CheckboxInput extends Input{
         this.value = e.target.checked
     }
     render(){
-        return `
+        if(this.value === this.#previousValue && this.#previousRender && !this.#firstRender){
+            return this.#previousRender
+        }
+        console.log(`CheckboxInput id ${this.id} render called`)
+        if(!this.#firstRender) this.#previousValue = this.value
+        this.#firstRender = false
+        this.#previousRender = `
             <div class="formData ${this.error ? 'field-error' : ''}">
                 <input class="checkbox-input" ${this.value && "checked"} type="${this.type}" id="${this.id}" name="${this.name}" ${this.required && 'required'}>
                 <label class="checkbox2-label" for="${this.id}">
@@ -98,7 +135,8 @@ export class CheckboxInput extends Input{
                 </label>
                 <span class="error">${this.error ? this.errorMessage : ''}</span>
             </div>
-        `;
+        `
+        return this.#previousRender
     }
 }
 
@@ -114,13 +152,25 @@ export class CheckboxInput extends Input{
  * @param {Function} validateCallback - La fonction de validation du champ.
  */
 export class RadioInput extends Input{
+    // valeur privée
+    #previousValue = null;
+    #previousRender = null;
+    #firstValidation = true;
+    #firstRender = true;
+
     constructor({id,name,label,required,error,errorMessage,options,validateCallback = () => true}){
         super({id,name,label,required,error,errorMessage,validateCallback})
         this.type = "radio"
         this.options = options
     }
     render(){
-        return `
+        if(this.value === this.#previousValue && this.#previousRender && !this.#firstRender){
+            return this.#previousRender
+        }
+        console.log(`RadioInput id ${this.id} render called`)
+        if(!this.#firstRender) this.#previousValue = this.value
+        this.#firstRender = false
+        this.#previousRender = `
             <div class="formData ${this.error ? 'field-error' : ''}" id="${this.id}">
                 <label class="text-label" for="${this.id}">${this.label}</label>
                 <div class="radio-options">
@@ -137,6 +187,7 @@ export class RadioInput extends Input{
                 <span class="error">${this.error ? this.errorMessage : ''}</span>
             </div>
         `;
+        return this.#previousRender
     }
 }
 
@@ -151,18 +202,31 @@ export class RadioInput extends Input{
  * @param {Function} validateCallback - La fonction de validation du champ.
  */
 export class DateInput extends Input{
+    // valeur privée
+    #previousValue = null;
+    #previousRender = null;
+    #firstValidation = true;
+    #firstRender = true;
+
     constructor({id,name,label,required,error,errorMessage,validateCallback = () => true}){
         super({id,name,label,required,error,errorMessage,validateCallback})
         this.type = "date"
     }
     render(){
-        return `
+        if(this.value === this.#previousValue && this.#previousRender && !this.#firstRender){
+            return this.#previousRender
+        }
+        console.log(`DateInput id ${this.id} render called`)
+        if(!this.#firstRender) this.#previousValue = this.value
+        this.#firstRender = false
+        this.#previousRender = `
             <div class="formData ${this.error ? 'field-error' : ''}">
                 <label class="text-label" for="${this.id}">${this.label}</label>
                 <input class="text-control" value="${this.value}" type="${this.type}" id="${this.id}" name="${this.name}" ${this.required && 'required'}>
                 <span class="error">${this.error ? this.errorMessage : ''}</span>
             </div>
         `;
+        return this.#previousRender
     }
 }
 
@@ -177,34 +241,61 @@ export class DateInput extends Input{
  * @param {Function} validateCallback - La fonction de validation du champ.
  */
 export class EmailInput extends Input{
+    // valeur privée
+    #previousValue = null;
+    #previousRender = null;
+    #firstValidation = true;
+    #firstRender = true;
+
     constructor({id,name,label,required,error,errorMessage,validateCallback = () => true}){
         super({id,name,label,required,error,errorMessage,validateCallback })
         this.type = "email"
     }
     render(){
-        return `
+        if(this.value === this.#previousValue && this.#previousRender && !this.#firstRender){
+            return this.#previousRender
+        }
+        console.log(`EmailInput id ${this.id} render called`)
+        if(!this.#firstRender) this.#previousValue = this.value
+        this.#firstRender = false
+        this.#previousRender = `
             <div class="formData ${this.error ? 'field-error' : ''}">
                 <label class="text-label" for="${this.id}">${this.label}</label>
                 <input class="text-control" value="${this.value}" type="${this.type}" id="${this.id}" name="${this.name}" ${this.required && 'required'}>
                 <span class="error">${this.error ? this.errorMessage : ''}</span>
             </div>
         `;
+        return this.#previousRender
     }
 
 }
 
 export class NumberInput extends Input{
+    // valeur privée
+    #previousValue = null;
+    #previousRender = null;
+    #firstValidation = true;
+    #firstRender = true;
+
     constructor({id,name,label,required,error,errorMessage,validateCallback = () => true}){
         super({id,name,label,required,error,errorMessage,validateCallback})
         this.type = "number"
     }
     render(){
-        return `
+        if(this.value === this.#previousValue && this.#previousRender && !this.#firstRender){
+            return this.#previousRender
+        }
+        console.log(`NumberInput id ${this.id} render called`)
+        if(!this.#firstRender) this.#previousValue = this.value
+        this.#firstRender = false
+
+        this.#previousRender = `
             <div class="formData ${this.error ? 'field-error' : ''}">
                 <label class="text-label" for="${this.id}">${this.label}</label>
                 <input class="text-control" value="${this.value}" type="${this.type}" id="${this.id}" name="${this.name}" ${this.required && 'required'}>
                 <span class="error">${this.error ? this.errorMessage : ''}</span>
             </div>
         `;
-    }   
+        return this.#previousRender
+    }
 }
