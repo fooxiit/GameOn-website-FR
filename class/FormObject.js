@@ -1,4 +1,9 @@
 export class formObject{
+    // valeur privée
+    #onRender;
+    #abortController;
+    #render;
+
     constructor({id,fields,submitCallback,submitButtonText,onRender=()=>{}}){
        this.id = id
        this.fields = fields
