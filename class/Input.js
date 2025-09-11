@@ -25,6 +25,10 @@ class Input{
         this.validateCallback = validateCallback
         this.value = ""
     }
+    reset() {
+        this.value = ""
+        this.error = false
+    }
     validate(){
         return new Promise((resolve,reject)=>{
             if(this.value === this.#previousValue && !this.#firstValidation){

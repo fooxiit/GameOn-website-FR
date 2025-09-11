@@ -6,16 +6,20 @@
  * @param {string} body - Le contenu HTML de la modale.
  */
 export class Modal {
+    #abortController
+    #anchor
+    #bodyElement
+    #body   
     constructor({anchor, body = null}) {
-        this.anchor = anchor;
-        this.body = body;
-        this.abortController = new AbortController();
-        this.bodyElement = null;
+        this.#anchor = anchor;
+        this.#body = body;
+        this.#abortController = new AbortController();
+        this.#bodyElement = null;
     }
 
     render() {
-        this.abortController.abort();
-        this.abortController = new AbortController();
+        this.#abortController.abort();
+        this.#abortController = new AbortController();
         return `
             <div class="modal-bground">
                 <div class="modal-content">
@@ -28,29 +32,29 @@ export class Modal {
     }
 
     close() {
-        this.anchor.innerHTML = '';
-        this.bodyElement = null;
-        this.abortController.abort();
-        this.abortController = new AbortController();
+        this.#anchor.innerHTML = '';
+        this.#bodyElement = null;
+        this.#abortController.abort();
+        this.#abortController = new AbortController();
     }
     open(onOpen) {
-        this.abortController.abort();
-        this.abortController = new AbortController();
-        this.anchor.innerHTML = this.render();
-        this.bodyElement = this.anchor.querySelector('.modal-body');
+        this.#abortController.abort();
+        this.#abortController = new AbortController();
+        this.#anchor.innerHTML = this.render();
+        this.#bodyElement = this.#anchor.querySelector('.modal-body');
         onOpen()
-        const closeButton = this.anchor.querySelectorAll('.modal-close');
+        const closeButton = this.#anchor.querySelectorAll('.modal-close');
         closeButton.forEach(button => {
-            button.addEventListener('click', () => this.close(), { signal: this.abortController.signal });
+            button.addEventListener('click', () => this.close(), { signal: this.#abortController.signal });
         });
     }
     update(body) {
-        
-        if (!this.bodyElement) return
-        this.bodyElement.innerHTML = body;
-        const closeButton = this.bodyElement.querySelectorAll('.btn-close');
+
+        if (!this.#bodyElement) return
+        this.#bodyElement.innerHTML = body;
+        const closeButton = this.#bodyElement.querySelectorAll('.btn-close');
         closeButton.forEach(button => {
-            button.addEventListener('click', () => this.close(), { signal: this.abortController.signal });
+            button.addEventListener('click', () => this.close(), { signal: this.#abortController.signal });
         });
     }
 }
