@@ -193,7 +193,7 @@ main {
 }
 
 .modal-message {
-  min-height: 850px;
+  min-height: 100%;
   font-size: 36px;
   font-weight: 400;
   display: flex;
@@ -525,6 +525,7 @@ input[data-error]::after {
   padding: 15px 23px;
   margin: 0;
   margin-top: 59px;
+  margin-bottom: 10px;
 }
 
 .hero-img {
@@ -634,7 +635,8 @@ footer {
     font-size: 18px;
   }
   .modal-bground{
-    top:79px
+    top:79px;
+    height: calc(100% - 79px); 
   }
   .modal-content{
     height: 100%;

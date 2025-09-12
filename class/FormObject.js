@@ -37,6 +37,7 @@ export class formObject{
     }
 
     render(){
+        
         this.#abortController.abort();
         this.#abortController = new AbortController();
         const formHTML = `
@@ -68,6 +69,7 @@ export class formObject{
 
     reset() {
         this.fields.forEach(field => field.reset());
+        
     }
 
 }
