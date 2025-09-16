@@ -84,7 +84,7 @@ export class ModalMessage {
     }
 
     /**
-     * Renders the modal message.
+     * Rend le message de la modale.
      * @returns {string}
      */
     render() {

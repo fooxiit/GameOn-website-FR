@@ -125,7 +125,7 @@ const registerForm = new formObject({
         ],
         submitCallback: (values) => {
             
-            modal.update(modalMessage.render(() => modal.close()))
+            modal.update(modalMessage.render())
         },
         submitButtonText: "C'est parti",
         onRender: (formElement) => {

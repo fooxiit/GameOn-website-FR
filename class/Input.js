@@ -1,6 +1,6 @@
 class Input{
     /**
-     * 
+     * Classe représentant un champ de saisie.
      * @param {String} id - L'identifiant du champ.
      * @param {String} name - Le nom du champ.
      * @param {String} label - L'étiquette du champ.
@@ -24,6 +24,11 @@ class Input{
         this.firstValidation = true;
         this.firstRender = true;
     }
+
+    /**
+     * Réinitialise le champ de saisie.
+     * @returns {void}
+     */
     reset() {
         
         this.previousValue = null
@@ -35,25 +40,32 @@ class Input{
         
 
     }
+    /**
+     * Valide le champ de saisie.
+     * @returns {Promise<boolean>} - Une promesse résolue avec true si le champ est valide, sinon rejetée avec le message d'erreur.
+     */
     validate(){
         return new Promise((resolve,reject)=>{
             
             if(this.value === this.previousValue && !this.firstValidation){
-                
-                if(this.error) reject(this.error)
-                resolve(this.error)
+                if(this.error) reject(this.errorMessage)
+                resolve(true)
                 return
             }
             this.firstValidation = false
             this.error = !this.validateCallback(this.value) 
             if(this.error){
                 
-                reject(this.error)
+                reject(this.errorMessage)
             }
-            resolve(this.error)
+            resolve(true)
         })
     }
 
+    /**
+     * Gère le changement de valeur du champ de saisie.
+     * @param {Event} e - L'événement de changement.
+     */
     onChange(e){
         this.value = e.target.value
     }
@@ -81,6 +93,10 @@ export class TextInput extends Input{
         this.placeholder = placeholder
     }
 
+    /**
+     * Rend le champ de saisie.
+     * @returns {string}
+     */
     render(){
         
         if(this.value === this.previousValue && this.previousRender && !this.firstRender){
@@ -117,10 +133,17 @@ export class CheckboxInput extends Input{
         super({id,name,label,required,error,value,errorMessage,validateCallback})
         this.type = "checkbox"
     }
+    /**
+     * Gère le changement de valeur du champ de saisie.
+     * @param {Event} e - L'événement de changement.
+     */
     onChange(e){
-        this.previousValue = this.value
         this.value = e.target.checked
     }
+    /**
+     * Rend le champ de saisie.
+     * @returns {string}
+     */
     render(){
         
         if(this.value === this.previousValue && this.previousRender && !this.firstRender){
@@ -160,6 +183,10 @@ export class RadioInput extends Input{
         this.type = "radio"
         this.options = options
     }
+    /**
+     * Rend le champ de saisie.
+     * @returns {string}
+     */
     render(){
         
         if(this.value === this.previousValue && this.previousRender && !this.firstRender){
@@ -204,6 +231,10 @@ export class DateInput extends Input{
         super({id,name,label,required,error,errorMessage,validateCallback})
         this.type = "date"
     }
+    /**
+     * Rend le champ de saisie.
+     * @returns {string}
+     */
     render(){
         
 
@@ -239,6 +270,10 @@ export class EmailInput extends Input{
         super({id,name,label,required,error,errorMessage,validateCallback })
         this.type = "email"
     }
+    /**
+     * Rend le champ de saisie.
+     * @returns {string}
+     */
     render(){
         
 
@@ -265,6 +300,10 @@ export class NumberInput extends Input{
         super({id,name,label,required,error,errorMessage,validateCallback})
         this.type = "number"
     }
+    /**
+     * Rend le champ de saisie.
+     * @returns {string}
+     */
     render(){
         
 
