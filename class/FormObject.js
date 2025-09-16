@@ -14,7 +14,10 @@ export class formObject{
     }
 
    
-
+    /**
+     * Récupère les valeurs des champs du formulaire.
+     * @returns {Object} - Un objet contenant les valeurs des champs.
+     */
     getValues(){
         const values = this.fields.reduce((acc, field) => {
             acc[field.name] = field.value;
@@ -23,6 +26,10 @@ export class formObject{
         return values;
     }
 
+    /**
+     * Soumet le formulaire.
+     * @param {Event} e - L'événement de soumission.
+     */
     submit(e){
         
         e.preventDefault();
@@ -36,6 +43,10 @@ export class formObject{
             });
     }
 
+    /**
+     * Rend le formulaire.
+     * @returns {string}
+     */
     render(){
         
         this.#abortController.abort();
@@ -67,6 +78,10 @@ export class formObject{
         });
     }
 
+    /**
+     * Réinitialise les champs du formulaire.
+     * @returns {void}
+     */
     reset() {
         this.fields.forEach(field => field.reset());
         

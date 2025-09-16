@@ -18,7 +18,7 @@ export class Modal {
     }
 
     /**
-     * Renders the modal content.
+     * Rend la modale.
      * @returns {string}
      */
     render() {
