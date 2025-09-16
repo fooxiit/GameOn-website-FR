@@ -17,6 +17,10 @@ export class Modal {
         this.#bodyElement = null;
     }
 
+    /**
+     * Renders the modal content.
+     * @returns {string}
+     */
     render() {
         this.#abortController.abort();
         this.#abortController = new AbortController();
@@ -30,13 +34,20 @@ export class Modal {
             </div>
         `;
     }
-
+    /**
+     * Ferme la modale.
+     * @returns {void}
+     */
     close() {
         this.#anchor.innerHTML = '';
         this.#bodyElement = null;
         this.#abortController.abort();
         this.#abortController = new AbortController();
     }
+    /**
+     * ouvre la modale.
+     * @param {Function} onOpen - Callback function à exécuter lorsque la modale est ouverte.
+     */
     open(onOpen) {
         this.#abortController.abort();
         this.#abortController = new AbortController();
@@ -48,6 +59,11 @@ export class Modal {
             button.addEventListener('click', () => this.close(), { signal: this.#abortController.signal });
         });
     }
+    /**
+     * Met à jour le contenu de la modale.
+     * @param {string} body - Le nouveau contenu à définir dans la modale.
+     * @returns {void}
+     */
     update(body) {
 
         if (!this.#bodyElement) return
@@ -58,13 +74,19 @@ export class Modal {
         });
     }
 }
-
-export class ModalMessage{
-    constructor({title = null, message}) {
+/**
+ * Classe représentant un message dans la modale.
+ */
+export class ModalMessage {
+    constructor({ title = null, message }) {
         this.title = title;
         this.message = message;
     }
 
+    /**
+     * Renders the modal message.
+     * @returns {string}
+     */
     render() {
         return `
             <div class="modal-message">
