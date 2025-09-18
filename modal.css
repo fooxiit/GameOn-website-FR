@@ -193,7 +193,7 @@ main {
 }
 
 .modal-message {
-  min-height: 100%;
+  min-height: 650px;
   font-size: 36px;
   font-weight: 400;
   display: flex;
